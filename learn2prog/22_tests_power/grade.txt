@@ -1,0 +1,65 @@
+Grading at Fri 25 Oct 2024 09:53:49 AM UTC
+**Testing broken implementation 10 **
+-------------------------------------
+
+Test failed: power(2, 3) = 2, expected 8
+
+**Testing broken implementation 11 **
+-------------------------------------
+
+Test failed: power(10, 2) = 4, expected 100
+
+**Testing broken implementation 1 **
+-------------------------------------
+
+Test failed: power(2, 3) = 2, expected 8
+
+**Testing broken implementation 2 **
+-------------------------------------
+
+Test failed: power(1, 0) = 0, expected 1
+
+**Testing broken implementation 3 **
+-------------------------------------
+
+Test failed: power(0, 0) = 0, expected 1
+
+**Testing broken implementation 4 **
+-------------------------------------
+
+Test failed: power(2, 31) = 0, expected 2147483648
+
+**Testing broken implementation 5 **
+-------------------------------------
+
+Test failed: power(2, 3) = 0, expected 8
+
+**Testing broken implementation 6 **
+-------------------------------------
+
+Test failed: power(0, 5) = 32, expected 0
+
+**Testing broken implementation 7 **
+-------------------------------------
+
+Test failed: power(0, 5) = 243, expected 0
+
+**Testing broken implementation 8 **
+-------------------------------------
+
+Test failed: power(2, 3) = 6, expected 8
+
+**Testing broken implementation 9 **
+-------------------------------------
+
+Test failed: power(2, 3) = 0, expected 8
+
+**Testing correct implementation **
+-------------------------------------
+
+All tests passed!
+
+All tests were ok.
+
+
+Overall Grade: PASSED

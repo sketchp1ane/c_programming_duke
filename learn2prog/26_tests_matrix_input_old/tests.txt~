@@ -1,0 +1,3 @@
+./rotateMatrix input1.txt
+./rotateMatrix input2.txt
+./rotateMatrix input_special_chars.txt

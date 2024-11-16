@@ -1,0 +1,28 @@
+aaaaa bbbbb
+aaaaa bbbbc
+aaabb bbbbc
+xxxyy yyyyx
+abcde fghij
+aabbc ddbba
+aabbb ddbbc
+aaaab ddddc
+aaabb cccdd
+aabbb ccddd
+abbbb cdddd
+c123456 55555
+caddb 0
+0 asdwm
+  aaaaa
+aassb
+\n
+aaaaa 66666
+hello world
+!!!!! *****
+abbcc ddeff
+abbbc dddda
+abcde fghij
+aaaaa bbbbb
+!!!!a ????b
+$$$$1 #####2
+abcde edcba
+aBCdE EdcBa

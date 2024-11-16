@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include "future.h"
+
+void add_future_card(future_cards_t * fc, size_t index, card_t * ptr) {
+    int temp = fc->decks[index].n_cards;
+    fc->decks[index].cards = realloc(fc->decks[index].cards, (temp + 1) * sizeof (card_t *));
+    if (fc->decks[index].cards == NULL) {
+        perror("Failed to allocate memory for future card pointer\n");
+        return;
+    }
+    fc->decks[index].cards[temp] = ptr;
+    fc->decks[index].n_cards++;
+}
+
+void future_cards_from_deck(deck_t * deck, future_cards_t * fc) {
+    for (int i = 0; i < fc->n_decks; i++) {
+        unsigned valueForThisDeck = deck->cards[i]->value;
+        suit_t suitForThisDeck = deck->cards[i]->suit;
+        for (int j = 0; j < fc->decks->n_cards; j++) {
+            fc->decks->cards[j]->value = valueForThisDeck;
+            fc->decks->cards[j]->suit = suitForThisDeck;
+        }
+    }
+}

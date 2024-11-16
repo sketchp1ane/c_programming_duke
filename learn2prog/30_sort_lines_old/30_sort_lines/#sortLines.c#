@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// This function is used to figure out the ordering
+// of the strings in qsort. You do not need
+// to modify it.
+int stringOrder(const void * vp1, const void * vp2) {
+    const char * const * p1 = vp1;
+    const char * const * p2 = vp2;
+    return strcmp(*p1, *p2);
+}
+
+// This function will sort and print data (whose length is count).
+void sortData(char ** data, size_t count) {
+    qsort(data, count, sizeof(char *), stringOrder);
+}
+
+// Function to read lines from a file or stdin
+char **readLines(FILE *fp, size_t *count) {
+    size_t capacity = 10; // initial capacity
+    char **lines = malloc(capacity * sizeof(char *));
+    if (!lines) return NULL; // handle malloc failure
+
+    *count = 0; // number of lines read
+    char *line = NULL;
+    size_t len = 0;
+
+    while (getline(&line, &len, fp) != -1) {
+        if (*count >= capacity) {
+            capacity *= 2;
+            lines = realloc(lines, capacity * sizeof(char *));
+            if (!lines) return NULL; // handle realloc failure
+        }
+        lines[*count] = strdup(line); // duplicate line
+        (*count)++;
+    }
+    free(line); // free temporary line buffer
+    return lines;
+}
+
+// Function to sort and print the lines
+void sortAndPrint(char **data, size_t count) {
+    sortData(data, count); // Sort the data
+    for (size_t i = 0; i < count; i++) {
+        printf("%s", data[i]); // Print each line
+        free(data[i]); // Free each line
+    }
+    free(data); // Free the array of pointers
+}
+
+int main(int argc, char **argv) {
+    if (argc == 1) {
+        // No arguments, read from stdin
+        size_t count;
+        char **lines = readLines(stdin, &count);
+        if (!lines) {
+            perror("Failed to read lines");
+            return EXIT_FAILURE;
+        }
+        sortAndPrint(lines, count);
+    } else {
+        // Read from files
+        for (int i = 1; i < argc; i++) {
+            FILE *fp = fopen(argv[i], "r");
+            if (!fp) {
+                perror("Failed to open file");
+                return EXIT_FAILURE;
+            }
+
+            size_t count;
+            char **lines = readLines(fp, &count);
+            fclose(fp); // Close the file after reading
+            if (!lines) {
+                perror("Failed to read lines");
+                return EXIT_FAILURE;
+            }
+
+            sortAndPrint(lines, count);
+        }
+    }
+
+    return EXIT_SUCCESS;
+}

@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+unsigned power(unsigned x, unsigned y);  // Prototype
+
+void run_check(unsigned x, unsigned y, unsigned expected_ans) {
+  unsigned result = power(x, y);
+  if (result != expected_ans) {
+    printf("Test failed: power(%u, %u) = %u, expected %u\n", x, y, result, expected_ans);
+    exit(EXIT_FAILURE);
+  }
+}
+
+int main(void) {
+  // Edge cases
+  run_check(0, 0, 1);          // 0^0 is conventionally 1
+  run_check(1, 0, 1);          // 1^0 = 1
+  run_check(0, 5, 0);          // 0^y (y > 0) = 0
+  run_check(5, 0, 1);          // x^0 (x > 0) = 1
+
+  // Regular cases
+  run_check(2, 3, 8);          // 2^3 = 8
+  run_check(3, 2, 9);          // 3^2 = 9
+  run_check(5, 3, 125);        // 5^3 = 125
+  run_check(10, 2, 100);       // 10^2 = 100
+
+  // Larger numbers
+  run_check(2, 10, 1024);      // 2^10 = 1024
+  run_check(3, 5, 243);        // 3^5 = 243
+  run_check(7, 4, 2401);       // 7^4 = 2401
+
+  // If all tests pass
+  printf("All tests passed!\n");
+  return EXIT_SUCCESS;
+}

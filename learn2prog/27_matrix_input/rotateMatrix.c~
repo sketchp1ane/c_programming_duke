@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define SIZE 10
+
+void rotate(char matrix[SIZE][SIZE]) {
+    char temp[SIZE][SIZE];
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            temp[j][SIZE - 1 - i] = matrix[i][j];
+        }
+    }
+    // Copy temp back to matrix
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            matrix[i][j] = temp[i][j];
+        }
+    }
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <input_file>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    FILE *file = fopen(argv[1], "r");
+    if (file == NULL) {
+        perror("Error opening file");
+        return EXIT_FAILURE;
+    }
+
+    char matrix[SIZE][SIZE];
+    memset(matrix, 0, sizeof(matrix)); // Initialize matrix to prevent uninitialized access
+
+    char line[SIZE + 2]; // Line buffer to handle 10 chars + newline + null terminator
+    int line_count = 0;
+
+    while (fgets(line, sizeof(line), file)) {
+        if (line_count >= SIZE) {
+            fprintf(stderr, "Error: Input file has more than 10 lines.\n");
+            fclose(file);
+            return EXIT_FAILURE;
+        }
+
+        // Check if the line length is correct (10 chars + newline)
+        if (strnlen(line, sizeof(line)) != SIZE + 1 || line[SIZE] != '\n') {
+            fprintf(stderr, "Error: Incorrect line length at line %d (expected 10 characters).\n", line_count + 1);
+            fclose(file);
+            return EXIT_FAILURE;
+        }
+
+        strncpy(matrix[line_count], line, SIZE); // Copy exactly 10 characters, ignore newline
+        line_count++;
+    }
+
+    if (line_count != SIZE) {
+        fprintf(stderr, "Error: Input file does not contain exactly 10 lines.\n");
+        fclose(file);
+        return EXIT_FAILURE;
+    }
+
+    fclose(file);
+
+    // Rotate the matrix 90 degrees clockwise
+    rotate(matrix);
+
+    // Print the rotated matrix to stdout
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            putchar(matrix[i][j]);
+        }
+        putchar('\n');
+    }
+
+    return EXIT_SUCCESS;
+}

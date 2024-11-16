@@ -1,0 +1,9 @@
+Grading at Wed 23 Oct 2024 12:14:24 PM UTC
+Attempting to compile test.c
+gcc -ggdb3 -Wall -Werror -pedantic -std=gnu99 -c test.c -o test.o
+gcc -ggdb3 -Wall -Werror -pedantic -std=gnu99 -o test test.o
+compiled
+Your file matched the expected output
+Your output matched what we expected
+
+Overall Grade: A
